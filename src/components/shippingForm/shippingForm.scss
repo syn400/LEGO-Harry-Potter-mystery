@@ -57,7 +57,18 @@
         }
 
         label[for=surname], label[for=name], label[for=zipCode], label[for=state] {
-            width: 48%;
+            width: 47%;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .formContainer {
+        width: 82%;
+        form {
+            label[for=surname], label[for=name], label[for=zipCode], label[for=state] {
+                width: 47%;
+            }
         }
     }
 }

@@ -112,6 +112,20 @@
             }
         }
     }
+}
+
+@media screen and (max-height: 1000px) and (min-width: 1000px) {
+    .minifigCard {
+            transform: scale(.8);
+            height: 110%;
+        }
+}
 
 
+@media screen and (max-width: 900px) {
+    .minifigCard {
+        height: 55rem;
+        width: 82%;
+        margin-top: 2rem;
+    }
 }

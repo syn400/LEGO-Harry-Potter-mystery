@@ -41,5 +41,16 @@ body {
     }
 }
 
+@media screen and (max-width: 900px) {
+    body {
+        .container {
+            margin: 3rem 0;
+            height: auto;
+            flex-direction: column;
+
+        }
+    }
+}
+
 @import './components/shippingForm/shippingForm.scss';
 @import './components/minifigCard/minifigCard.scss';
