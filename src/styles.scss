@@ -30,4 +30,14 @@ body {
         color: $bgSecondary;
         rotate: 30deg;
     }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10%
+    }
 }
+
+@import './components/shippingForm/shippingForm.scss';
+@import './components/minifigCard/minifigCard.scss';

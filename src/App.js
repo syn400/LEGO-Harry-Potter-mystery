@@ -1,6 +1,6 @@
 import './styles.scss'
-import {MinifigCard} from './components/minifigCard'
-import {ShippingForm} from './components/shippingForm'
+import {MinifigCard} from './components/minifigCard/minifigCard'
+import {ShippingForm} from './components/shippingForm/shippingForm'
 
 function App() {
 

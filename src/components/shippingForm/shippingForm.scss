@@ -1,0 +1,64 @@
+.formContainer {
+    color: #e7e7e7;
+    width: 35rem;
+
+    h1.title {
+        font-family: $TitleFont;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-bottom: 3rem;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        label {
+            width:100%;
+
+            input, select {
+                color: #333333;
+                font-weight: 700;
+                width: 100%;
+                padding: .9rem 1rem;
+                font-size: 1.1rem;
+                border: none;
+                border-radius: 5px;
+
+                &:focus {
+                    outline: 0 !important;
+                    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -khtml-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none; 
+                }
+            }
+
+            p {
+                margin-bottom: .6rem;
+            }
+        }
+
+        label.error {
+            position: relative;
+            span {
+                position: absolute;
+                right: 0;
+                color: #ff7373;
+                font-weight: 700;
+            }
+            input, select {
+                background-color: #ffb4b4;
+
+            }
+        }
+
+        label[for=surname], label[for=name], label[for=zipCode], label[for=state] {
+            width: 48%;
+        }
+    }
+}
