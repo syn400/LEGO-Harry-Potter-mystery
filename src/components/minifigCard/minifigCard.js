@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import api from '../../apiVariables';
 
 
-export const MinifigCard = () => {
+export const MinifigCard = (props) => {
+    const [minifigArr, setMinifigArr] = useState([]);
     const [minifig, setMinifig] = useState(null);
     const [minifigParts, setMinifigParts] = useState(null);
     
-    const getResponse = async () => { 
+    const getResponse = async () => {
         await api.get('/minifigs/?page_size=400&in_theme_id=246').then(res => {
             const minifigRes =  res.data.results[Math.floor(Math.random()*res.data.results.length)]
 
             setMinifig(minifigRes);
+            setMinifigArr(res.data.results)
 
             api.get("/minifigs/" + minifigRes.set_num + "/parts/").then(res => {
                 setMinifigParts(res.data.results);
@@ -18,8 +20,19 @@ export const MinifigCard = () => {
 
         });
     }
+    const getFigure = async () => {
+        const minifigRes =  minifigArr[Math.floor(Math.random()*minifigArr.length)]
 
+        setMinifig(minifigRes);
+
+        await api.get("/minifigs/" + minifigRes.set_num + "/parts/").then(res => {
+            setMinifigParts(res.data.results);
+        })
+    }
+
+    
     const shouldLog = useRef(true)
+    
     useEffect(()=>{
         if(shouldLog.current) {
             shouldLog.current = false;
@@ -72,9 +85,13 @@ export const MinifigCard = () => {
                   </div>
       
                   <div className='btnSection'>
-                      <button id='drawBtn'>Draw Again</button>
+                      <button id='drawBtn' onClick={()=> {
+                            getFigure()
+                        }
+                      }>Draw Again</button>
                       <p>or</p>
-                      <button id='orderBtn'>Place an order</button>
+                      <button id='orderBtn' onClick={()=> {
+                      }}>Place an order</button>
                   </div>
               </div>
       

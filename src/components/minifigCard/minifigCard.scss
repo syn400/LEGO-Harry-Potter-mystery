@@ -1,6 +1,6 @@
 .minifigCard {
     background-color: #fff;
-    height: 93%;
+    height: 95%;
     width: 25rem;
     border-radius: 20px;
     padding: 3rem 2rem;
@@ -8,7 +8,7 @@
     font-weight: 700;
 
     & > div {
-        height: 95%;
+        height: 98%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -140,14 +140,14 @@
 @media screen and (max-height: 1000px) and (min-width: 1000px) {
     .minifigCard {
             transform: scale(.8);
-            height: 110%;
+            height: 117%;
     }
 }
 
 
 @media screen and (max-width: 900px) {
     .minifigCard {
-        height: 55rem;
+        height: 60rem;
         width: 82%;
         margin-top: 2rem;
 

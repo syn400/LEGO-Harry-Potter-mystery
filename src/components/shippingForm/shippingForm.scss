@@ -46,9 +46,11 @@
             position: relative;
             span {
                 position: absolute;
+                top: 0.1rem;
                 right: 0;
                 color: #ff7373;
                 font-weight: 700;
+                font-size: 0.9rem;
             }
             input, select {
                 background-color: #ffb4b4;
@@ -66,6 +68,12 @@
     .formContainer {
         width: 82%;
         form {
+            label[for='zipCode'].error, label[for='state'].error {
+                span {
+                    top: 4.8rem;
+                }
+            }
+
             label[for=surname], label[for=name], label[for=zipCode], label[for=state] {
                 width: 47%;
             }
