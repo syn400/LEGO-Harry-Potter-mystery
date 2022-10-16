@@ -1,4 +1,4 @@
-#Tivix coding task
+# Tivix coding task
 
 live website: https://TivixHpTask.netlify.app.
 
