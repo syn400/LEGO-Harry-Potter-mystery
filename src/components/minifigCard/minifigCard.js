@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import api from '../../apiVariables';
+import { useNavigate } from 'react-router-dom';
+import {api, apiPost} from '../../apiVariables';
 
 
 export const MinifigCard = (props) => {
@@ -21,6 +22,24 @@ export const MinifigCard = (props) => {
 
         });
     }
+
+    const nav = useNavigate();
+
+    const postOrder = async () => {
+        const orderNum = Math.floor(Math.random()*100000+1);
+        console.log(props.data)
+        console.log(minifig)
+        await apiPost.post('/orders', {
+            "order_number": orderNum,
+            "user_data": props.data,
+            "minifig": minifig,
+            "minifig_parts": minifig.parts
+        })
+          .then(function (response) {
+            nav('/your-order')
+        });
+    };
+
     const getFigure = async () => {
         const minifigRes =  minifigArr[Math.floor(Math.random()*minifigArr.length)]
 
@@ -43,6 +62,7 @@ export const MinifigCard = (props) => {
 
     const submitOrder = () => {
         if(Object.values(props.errors).every(e=>e === null) && Object.values(props.data).every(e=>e !== null)) {
+            postOrder()
         } else {
             setPopUp(true)
         }
