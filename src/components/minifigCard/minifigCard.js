@@ -6,6 +6,7 @@ export const MinifigCard = (props) => {
     const [minifigArr, setMinifigArr] = useState([]);
     const [minifig, setMinifig] = useState(null);
     const [minifigParts, setMinifigParts] = useState(null);
+    const [popUp, setPopUp] = useState(false)
     
     const getResponse = async () => {
         await api.get('/minifigs/?page_size=400&in_theme_id=246').then(res => {
@@ -40,6 +41,13 @@ export const MinifigCard = (props) => {
         }
     },[])
 
+    const submitOrder = () => {
+        if(Object.values(props.errors).every(e=>e === null) && Object.values(props.data).every(e=>e !== null)) {
+        } else {
+            setPopUp(true)
+        }
+    }
+
     if(minifig === null & minifigParts === null) {
         return (
             <div className='minifigCard'>
@@ -56,7 +64,14 @@ export const MinifigCard = (props) => {
         )
     } else {
         return (
-          <div className='minifigCard'>
+        <>
+            { popUp ? <div className='popupAlert' >
+                        <h1>Ooops..</h1>
+                        <h2>You have to complete all required fields!</h2>
+                        <button onClick={()=>setPopUp(false)}>Ok!</button>
+                    </div>
+                    : null}
+            <div className='minifigCard'>
               <h1 className='title'>Your minifig</h1>
               <div>
                   <div>
@@ -90,12 +105,15 @@ export const MinifigCard = (props) => {
                         }
                       }>Draw Again</button>
                       <p>or</p>
-                      <button id='orderBtn' onClick={()=> {
+                      <button id='orderBtn' onClick={(e)=> {
+                        e.preventDefault();
+                        submitOrder()
                       }}>Place an order</button>
                   </div>
               </div>
       
           </div>
+          </>
         )
     }
 

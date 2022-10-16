@@ -1,29 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 
 
 export const ShippingForm = (props) => {
-
-  const namRef = useRef()
-  const surnameRef = useRef()
-  const phoneNumRef = useRef()
-  const emailRef = useRef()
-  const dateOfBirthRef = useRef()
-  const adressRef = useRef()
-  const cityRef = useRef()
-  const stateRef = useRef()
-  const zipCodeRef = useRef()
-
-  const [errors, setErrors] = useState({
-    nameErr: null,
-    surnameErr: null,
-    phoneNumErr: null,
-    emailErr: null,
-    dateErr: null,
-    adressErr: null,
-    cityErr: null,
-    stateErr: null,
-    zipCodeErr: null
-  })
 
 
   
@@ -31,107 +9,120 @@ export const ShippingForm = (props) => {
     <div className="formContainer">
       <h1 className='title'>Shipping details</h1>
       <form>
-        <label htmlFor='name' className={errors.nameErr !== null ? 'error' : null}>
-          <p>Name {errors.nameErr !== null ? <span>{errors.nameErr}</span> : null}</p>
-          <input type="text" ref={namRef} onBlur={(e)=> {
+        <label htmlFor='name' className={props.errors.nameErr !== null ? 'error' : null}>
+          <p>Name {props.errors.nameErr !== null ? <span>{props.errors.nameErr}</span> : null}</p>
+          <input type="text" onBlur={(e)=> {
             if(e.target.value.length < 1) {
-              setErrors({...errors, nameErr: 'Min 1 character.'})
+              props.setErrors({...props.errors, nameErr: 'Min 1 character.'})
              } else if (e.target.value.length >= 255){
-              setErrors({...errors, nameErr: 'Max 255 characters.'})
+              props.setErrors({...props.errors, nameErr: 'Max 255 characters.'})
              } else {
-               setErrors({...errors, nameErr: null})
+               props.setErrors({...props.errors, nameErr: null})
+               props.setUsr({...props.data, name: e.target.value})
              } 
           }}
              id='name'/>
         </label>
 
-        <label htmlFor='surname' className={errors.surnameErr !== null ? 'error' : null}>
-          <p>Surname {errors.surnameErr !== null ? <span>{errors.surnameErr}</span> : null}</p>
-          <input type="text" ref={surnameRef} id='surname' 
+        <label htmlFor='surname' className={props.errors.surnameErr !== null ? 'error' : null}>
+          <p>Surname {props.errors.surnameErr !== null ? <span>{props.errors.surnameErr}</span> : null}</p>
+          <input type="text" id='surname' 
           onBlur={(e)=> {
             if(e.target.value.length < 1) {
-              setErrors({...errors, surnameErr: 'Min 1 character.'})
+              props.setErrors({...props.errors, surnameErr: 'Min 1 character.'})
              } else if (e.target.value.length >= 255){
-              setErrors({...errors, surnameErr: 'Max 255 characters.'})
+              props.setErrors({...props.errors, surnameErr: 'Max 255 characters.'})
              } else {
-               setErrors({...errors, surnameErr: null})
+               props.setErrors({...props.errors, surnameErr: null})
+               props.setUsr({...props.data, surname: e.target.value})
              } 
-          }}/>
+          }} />
         </label>
 
-        <label htmlFor='phoneNumber' className={errors.phoneNumErr !== null ? 'error' : null}>
-          <p>Phone Number {errors.phoneNumErr !== null ? <span>{errors.phoneNumErr}</span> : null}</p>
-          <input type="tel" ref={phoneNumRef} id='phoneNumber' pattern="\d*"
+        <label htmlFor='phoneNumber' className={props.errors.phoneNumErr !== null ? 'error' : null}>
+          <p>Phone Number {props.errors.phoneNumErr !== null ? <span>{props.errors.phoneNumErr}</span> : null}</p>
+          <input type="tel" maxLength='13' id='phoneNumber' pattern="\d*"
           onBlur={(e)=> {
-            if(!/^[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4,6}$/im.test(e.target.value)) {
-              setErrors({...errors, phoneNumErr: 'Invalid phone format - (123)123-1234'})
+            if(!/^[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4}$/im.test(e.target.value)) {
+              props.setErrors({...props.errors, phoneNumErr: 'Invalid phone format - (123)123-1234'})
              } else {
-               setErrors({...errors, phoneNumErr: null})
+               props.setErrors({...props.errors, phoneNumErr: null})
+               props.setUsr({...props.data, phoneNum: e.target.value})
              } 
           }}/>
         </label>
 
-        <label htmlFor='email' className={errors.emailErr !== null ? 'error' : null}>
-          <p>Email {errors.emailErr !== null ? <span>{errors.emailErr}</span> : null}</p>
-          <input type="email" ref={emailRef} id='email' 
+        <label htmlFor='email' className={props.errors.emailErr !== null ? 'error' : null}>
+          <p>Email {props.errors.emailErr !== null ? <span>{props.errors.emailErr}</span> : null}</p>
+          <input type="email" id='email' 
           onBlur={(e)=> {
             if(!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               ).test(e.target.value)) {
-              setErrors({...errors, emailErr: 'Invalid email format - example@server.com'})
+              props.setErrors({...props.errors, emailErr: 'Invalid email format - example@server.com'})
              } else {
-               setErrors({...errors, emailErr: null})
+               props.setErrors({...props.errors, emailErr: null})
+               props.setUsr({...props.data, email: e.target.value})
              } 
           }}/>
         </label>
         
-        <label htmlFor='dateOfBirth' className={errors.dateErr !== null ? 'error' : null}>
-          <p>Date of birth {errors.dateErr !== null ? <span>{errors.dateErr}</span> : null}</p>
-          <input type="text" ref={dateOfBirthRef} id='dateOfBirth' pattern="\d*" 
+        <label htmlFor='dateOfBirth' className={props.errors.dateErr !== null ? 'error' : null}>
+          <p>Date of birth {props.errors.dateErr !== null ? <span>{props.errors.dateErr}</span> : null}</p>
+          <input type="text" maxLength='10' id='dateOfBirth' pattern="\d*" 
           onBlur={(e)=> {
+            const date = new Date();
+            const currentYear = date.getFullYear();
+
             if(!/^(?:0[1-9]|1[012])([/])(?:0[1-9]|[12]\d|3[01])\1(?:19|20)\d\d$/.test(e.target.value)) {
-              setErrors({...errors, dateErr: 'Invalid date format - mm/dd/yyyy'})
+              props.setErrors({...props.errors, dateErr: 'Invalid date format - mm/dd/yyyy'})
+             } else if (e.target.value.slice(6,10) >= currentYear) {
+              props.setErrors({...props.errors, dateErr: 'Your date must be in the past'})
              } else {
-               setErrors({...errors, dateErr: null})
+               props.setErrors({...props.errors, dateErr: null})
+               props.setUsr({...props.data, date: e.target.value})
              } 
           }}/>
         </label>
 
-        <label htmlFor='adress' className={errors.adressErr !== null ? 'error' : null}>
-          <p>Adress {errors.adressErr !== null ? <span>{errors.adressErr}</span> : null}</p>
-          <input type="text" ref={adressRef} id='adress'
+        <label htmlFor='adress' className={props.errors.adressErr !== null ? 'error' : null}>
+          <p>Adress {props.errors.adressErr !== null ? <span>{props.errors.adressErr}</span> : null}</p>
+          <input type="text" id='adress'
           onBlur={(e)=> {
             if(e.target.value.length < 1) {
-              setErrors({...errors, adressErr: 'Adress must have min 1 character.'})
+              props.setErrors({...props.errors, adressErr: 'Adress must have min 1 character.'})
              } else if (e.target.value.length >= 255){
-              setErrors({...errors, adressErr: 'Adress can have maximum 255 characters.'})
+              props.setErrors({...props.errors, adressErr: 'Adress can have maximum 255 characters.'})
              } else {
-               setErrors({...errors, adressErr: null})
+               props.setErrors({...props.errors, adressErr: null})
+               props.setUsr({...props.data, adress: e.target.value})
              } 
           }}/>
         </label>
 
-        <label htmlFor='city' className={errors.cityErr !== null ? 'error' : null}>
-          <p>City {errors.cityErr !== null ? <span>{errors.cityErr}</span> : null}</p>
-          <input type="text" ref={cityRef} id='city'
+        <label htmlFor='city' className={props.errors.cityErr !== null ? 'error' : null}>
+          <p>City {props.errors.cityErr !== null ? <span>{props.errors.cityErr}</span> : null}</p>
+          <input type="text" id='city'
           onBlur={(e)=> {
             if(e.target.value.length < 1) {
-              setErrors({...errors, cityErr: 'City must have min 1 character.'})
+              props.setErrors({...props.errors, cityErr: 'City must have min 1 character.'})
              } else if (e.target.value.length >= 255){
-              setErrors({...errors, cityErr: 'City can have maximum 255 characters.'})
+              props.setErrors({...props.errors, cityErr: 'City can have maximum 255 characters.'})
              } else {
-               setErrors({...errors, cityErr: null})
+               props.setErrors({...props.errors, cityErr: null})
+               props.setUsr({...props.data, city: e.target.value})
              } 
           }}/>
         </label>
 
-        <label htmlFor='state' className={errors.stateErr !== null ? 'error' : null}>
-          <p>State {errors.stateErr !== null ? <span>{errors.stateErr}</span> : null}</p>
-          <select id='state' ref={stateRef} defaultValue="placeholder" 
+        <label htmlFor='state' className={props.errors.stateErr !== null ? 'error' : null}>
+          <p>State {props.errors.stateErr !== null ? <span>{props.errors.stateErr}</span> : null}</p>
+          <select id='state' defaultValue="placeholder" 
           onBlur={(e)=> {
             if(e.target.value === 'placeholder') {
-              setErrors({...errors, stateErr: 'You have to choose state'})
+              props.setErrors({...props.errors, stateErr: 'You have to choose state'})
              } else {
-               setErrors({...errors, stateErr: null})
+               props.setErrors({...props.errors, stateErr: null})
+               props.setUsr({...props.data, state: e.target.value})
              } 
           }}>
             <option disabled value='placeholder'>Choose your state</option>
@@ -189,14 +180,15 @@ export const ShippingForm = (props) => {
           </select>
         </label>
 
-        <label htmlFor='zipCode' className={errors.zipCodeErr !== null ? 'error' : null}>
-          <p>Zip Code {errors.zipCodeErr !== null ? <span>{errors.zipCodeErr}</span> : null} </p>
-          <input type="text" ref={zipCodeRef} id='zipCode' pattern="\d*"
+        <label htmlFor='zipCode' className={props.errors.zipCodeErr !== null ? 'error' : null}>
+          <p>Zip Code {props.errors.zipCodeErr !== null ? <span>{props.errors.zipCodeErr}</span> : null} </p>
+          <input type="text" maxLength='10' id='zipCode' pattern="\d*"
           onBlur={(e)=> {
             if(!/^\d{5}(-\d{4})?$/d.test(e.target.value)) {
-              setErrors({...errors, zipCodeErr: 'Invalid zip code format - 12345 or 12345-6789'})
+              props.setErrors({...props.errors, zipCodeErr: 'Invalid zip code format - 12345 or 12345-6789'})
              } else {
-               setErrors({...errors, zipCodeErr: null})
+               props.setErrors({...props.errors, zipCodeErr: null})
+               props.setUsr({...props.data, zipCode: e.target.value})
              } 
           }}/>
         </label>
