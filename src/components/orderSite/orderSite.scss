@@ -4,6 +4,7 @@ height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
+overflow: hidden;
 
     & > div {
         background-color: #f9f9f9;
@@ -14,6 +15,30 @@ align-items: center;
         flex-direction: column;
         align-items: center;
         border-radius: 3rem;
+
+        &::after, &::before {
+            content: "?";
+            position: absolute;
+            font-family: $TitleFont;
+        }
+    
+        &::after {
+            z-index: -1;
+            left: 10vw;
+            top: 6vw;
+            font-size: 20vw;
+            color: $bgSecondary;
+            rotate: -30deg;
+        }
+    
+        &::before {
+            z-index: -1;
+            right: -10vw;
+            bottom: -19vw;
+            font-size: 60vw;
+            color: $bgSecondary;
+            rotate: 30deg;
+        }
 
         h1 {
             font-family: $TitleFont;
