@@ -47,7 +47,6 @@ export const MinifigCard = (props) => {
                 state: null,
                 zipCode: null
             })
-            nav('/your-order')
         });
     };
 
@@ -74,6 +73,8 @@ export const MinifigCard = (props) => {
     const submitOrder = () => {
         if(Object.values(props.errors).every(e=>e === null) && Object.values(props.data).every(e=>e !== null)) {
             postOrder()
+            clearForm()
+            nav('/your-order')
         } else {
             setPopUp(true)
         }
@@ -138,7 +139,6 @@ export const MinifigCard = (props) => {
                       <p>or</p>
                       <button id='orderBtn' onClick={(e)=> {
                         e.preventDefault();
-                        clearForm()
                         submitOrder()
                       }}>Place an order</button>
                   </div>
