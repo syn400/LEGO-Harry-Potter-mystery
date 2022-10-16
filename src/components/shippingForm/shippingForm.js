@@ -3,12 +3,10 @@ import React from 'react'
 
 export const ShippingForm = (props) => {
 
-
-  
   return (
     <div className="formContainer">
       <h1 className='title'>Shipping details</h1>
-      <form>
+      <form id="mainForm">
         <label htmlFor='name' className={props.errors.nameErr !== null ? 'error' : null}>
           <p>Name {props.errors.nameErr !== null ? <span>{props.errors.nameErr}</span> : null}</p>
           <input type="text" onBlur={(e)=> {

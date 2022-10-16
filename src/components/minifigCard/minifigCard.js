@@ -8,6 +8,8 @@ export const MinifigCard = (props) => {
     const [minifig, setMinifig] = useState(null);
     const [minifigParts, setMinifigParts] = useState(null);
     const [popUp, setPopUp] = useState(false)
+
+    const clearForm = () => document.getElementById('mainForm').reset()
     
     const getResponse = async () => {
         await api.get('/minifigs/?page_size=400&in_theme_id=246').then(res => {
@@ -27,15 +29,24 @@ export const MinifigCard = (props) => {
 
     const postOrder = async () => {
         const orderNum = Math.floor(Math.random()*100000+1);
-        console.log(props.data)
-        console.log(minifig)
         await apiPost.post('/orders', {
             "order_number": orderNum,
             "user_data": props.data,
             "minifig": minifig,
             "minifig_parts": minifig.parts
         })
-          .then(function (response) {
+          .then(function () {
+            props.setUsr({
+                name: null,
+                surname: null,
+                phoneNum: null,
+                email: null,
+                date: null,
+                adress: null,
+                city: null,
+                state: null,
+                zipCode: null
+            })
             nav('/your-order')
         });
     };
@@ -88,7 +99,7 @@ export const MinifigCard = (props) => {
             { popUp ? <div className='popupAlert' >
                         <h1>Ooops..</h1>
                         <h2>You have to complete all required fields!</h2>
-                        <button onClick={()=>setPopUp(false)}>Ok!</button>
+                        <button onClick={()=>setPopUp(false)}>Lets do it!</button>
                     </div>
                     : null}
             <div className='minifigCard'>
@@ -127,6 +138,7 @@ export const MinifigCard = (props) => {
                       <p>or</p>
                       <button id='orderBtn' onClick={(e)=> {
                         e.preventDefault();
+                        clearForm()
                         submitOrder()
                       }}>Place an order</button>
                   </div>

@@ -28,10 +28,11 @@ function App() {
     zipCodeErr: null
   });
 
+
   return (
     <div className="container">
-        <ShippingForm setUsr={setUserData} data={userData} errors={errors} setErrors={setErrors}/>
-        <MinifigCard data={userData} errors={errors} setErrors={setErrors} />
+        <ShippingForm setUsr={setUserData} data={userData} errors={errors} setErrors={setErrors} />
+        <MinifigCard data={userData} setUsr={setUserData} errors={errors} setErrors={setErrors} />
     </div>
   );
 }

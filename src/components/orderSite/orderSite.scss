@@ -1,0 +1,46 @@
+.orderSite {
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+
+    & > div {
+        background-color: #f9f9f9;
+        width: 50%;
+        height: 40%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 3rem;
+
+        h1 {
+            font-family: $TitleFont;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h2{
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        button {
+            border: none;
+            width: 30%;
+            height: 15%;
+            border-radius: 2rem;
+            background-color: $mainColor;
+            font-weight: 700;
+            transition: transform .3s, filter, .3s;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.03);
+                filter: brightness(110%);
+            }
+        }
+    }
+}
